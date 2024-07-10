@@ -1,9 +1,11 @@
+/* Estilos gerais */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
+/* Estilos para header e footer */
 header, footer {
     background-color: #333;
     color: white;
@@ -11,6 +13,7 @@ header, footer {
     padding: 1rem;
 }
 
+/* Estilos para navegação */
 nav ul {
     list-style-type: none;
     padding: 0;
@@ -30,28 +33,12 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
+/* Estilos para conteúdo principal */
 main {
     padding: 2rem;
 }
 
-h1 {
-    color: #333;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
-input[type="text"], input[type="submit"] {
-    margin-top: 5px;
-}
-
+/* Estilos para listas */
 ul {
     list-style-type: none;
     padding: 0;
@@ -59,6 +46,35 @@ ul {
 
 ul li {
     margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #000000;
+    background-color: #000000;
+}
+
+ul li:nth-child(odd) {
+    background-color: #000000;
+}
+
+/* Estilos para formulários */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+form ul li {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+form ul li:nth-child(odd) {
+    background-color: #f1f1f1;
 }
 
 input[type="submit"] {
@@ -71,4 +87,29 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #555;
+}
+
+/* Estilos para títulos dentro do header */
+header h1,
+header h2,
+header h3,
+header h4,
+header h5,
+header h6 {
+    color: rgb(0, 0, 0);
+}
+
+/* Estilos para campos de seleção */
+select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+select:focus {
+    border-color: #aaa;
+    outline: none;
 }
