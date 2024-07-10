@@ -3,7 +3,7 @@ session_start();
 
 // Verificar se o usuário já está logado
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header("Location: add_product.php");
+    header("Location: admin_panel.php");
     exit();
 }
 
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verificar credenciais (substitua isso pela verificação no banco de dados)
     if ($login === 'admin' && $password === 'admin') {
         $_SESSION['admin_logged_in'] = true;
-        header("Location: add_product.php");
+        header("Location: admin_panel.php");
         exit();
     } else {
         $error = "Login ou senha incorretos.";
