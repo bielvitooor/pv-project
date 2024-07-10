@@ -1,4 +1,4 @@
-<?php include('partials/header.php'); ?>
+<?php include('../partials/header.php'); ?>
     <main>
         <h1>Painel Administrativo</h1>
         <h2>Adicionar Novo Produto</h2>
@@ -12,4 +12,4 @@
             <input type="submit" value="Adicionar Produto">
         </form>
     </main>
-<?php include('partials/footer.php'); ?>
+<?php include('../partials/footer.php'); ?>
