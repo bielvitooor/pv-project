@@ -13,7 +13,7 @@
                 <li><a href="/pv-project/index.php">Home</a></li>
                 <li><a href="/pv-project/views/products.php">Produtos</a></li>
                 <li><a href="/pv-project/views/orders.php">Pedidos</a></li>
-                <li><a href="/pv-project/views/admin.php">Admin</a></li>
+                <li><a href="/pv-project/views/login.php">Admin</a></li>
             </ul>
         </nav>
     </header>
