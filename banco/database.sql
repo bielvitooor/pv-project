@@ -34,12 +34,12 @@ ENGINE = InnoDB;
 
 -- Tabela orders
 CREATE TABLE IF NOT EXISTS orders (
-  idorders INT NOT NULL AUTO_INCREMENT,
+  idorder INT NOT NULL AUTO_INCREMENT,
   status_order VARCHAR(45) NOT NULL,
   totalvalue DECIMAL(10, 2) NOT NULL,
   payment_idpayment INT NOT NULL,
   guest_idguest INT NOT NULL,
-  PRIMARY KEY (idorders),
+  PRIMARY KEY (idorder),
   INDEX fk_orders_payment1_idx (payment_idpayment ASC),
   INDEX fk_orders_guest1_idx (guest_idguest ASC),
   CONSTRAINT fk_orders_payment1
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS order_items (
   INDEX fk_order_items_product1_idx (product_id ASC),
   CONSTRAINT fk_order_items_orders1
     FOREIGN KEY (order_id)
-    REFERENCES orders (idorders)
+    REFERENCES orders (idorder)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT fk_order_items_product1
