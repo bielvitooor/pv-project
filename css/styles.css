@@ -1,115 +1,217 @@
-/* Estilos gerais */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
 
-/* Estilos para header e footer */
-header, footer {
-    background-color: #333;
+header {
+    background-color: #4CAF50;
     color: white;
+    padding: 10px 0;
     text-align: center;
-    padding: 1rem;
 }
 
-/* Estilos para navegação */
-nav ul {
-    list-style-type: none;
-    padding: 0;
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
 }
 
-nav ul li {
-    display: inline;
-    margin: 0 1rem;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-nav ul li a:hover {
-    text-decoration: underline;
-}
-
-/* Estilos para conteúdo principal */
-main {
-    padding: 2rem;
-}
-
-/* Estilos para listas */
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-ul li {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border: 1px solid #000000;
-    background-color: #000000;
-}
-
-ul li:nth-child(odd) {
-    background-color: #000000;
-}
-
-/* Estilos para formulários */
-form {
+/* Estilos Específicos para Produtos */
+.product-grid {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-form ul {
-    list-style-type: none;
+.product {
+    background: #fff;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(50% - 20px); /* 50% width minus margin */
+}
+
+.product img {
+    width: 50px;
+    height: 50px;
+}
+
+.product-info {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.product-info h3 {
+    margin: 0;
     padding: 0;
 }
 
-form ul li {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
+.product-info p {
+    margin: 5px 0;
 }
 
-form ul li:nth-child(odd) {
-    background-color: #f1f1f1;
+.product-controls {
+    display: flex;
+    align-items: center;
 }
 
-input[type="submit"] {
-    padding: 10px;
-    background-color: #333;
+.product-controls button {
+    background-color: #4CAF50;
     color: white;
     border: none;
+    padding: 5px 10px;
     cursor: pointer;
+    border-radius: 5px;
+    margin: 0 5px;
 }
 
-input[type="submit"]:hover {
-    background-color: #555;
+.product-controls input {
+    width: 30px;
+    text-align: center;
+    margin: 0 5px;
 }
 
-/* Estilos para títulos dentro do header */
-header h1,
-header h2,
-header h3,
-header h4,
-header h5,
-header h6 {
-    color: rgb(0, 0, 0);
+.total {
+    font-size: 1.5em;
+    margin-top: 20px;
+    text-align: right;
 }
 
-/* Estilos para campos de seleção */
-select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    color: #333;
+button.buy {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 20px auto;
+    font-size: 1.2em;
+}
+
+.unavailable {
+    color: red;
+}
+
+
+
+
+/* Estilização geral da página Painel */
+/* Estilo global */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Container central */
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Sidebar e conteúdo principal */
+.main-panel {
+    display: flex;
+    margin-top: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 25%;
+    margin-right: 20px;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+}
+
+.sidebar button {
+    display: block;
     width: 100%;
-    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
 }
 
-select:focus {
-    border-color: #aaa;
-    outline: none;
+.sidebar button:hover {
+    background-color: #45a049;
 }
+
+/* Tabela de produtos */
+.product-table {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 1;
+}
+
+.product-table h2 {
+    margin-top: 0;
+}
+
+.product-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-table th, .product-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-table th {
+    background-color: #f2f2f2;
+}
+
+/* Rodapé */
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Ícone de perfil */
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
