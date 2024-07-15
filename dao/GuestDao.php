@@ -35,6 +35,12 @@ class GuestDao
         $stmt->bindParam(':idguest', $idGuest);
         return $stmt->execute();
     }
+    public function getGuestByCpf($cpf){
+        $stmt = $this->conn->prepare("SELECT * FROM guest WHERE cpf = :cpf");
+        $stmt->bindParam(':cpf', $cpf);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
 }
 
 // Exemplo de uso
