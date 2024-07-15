@@ -5,37 +5,31 @@ class Guest
     private $name;
     private $cpf;
 
-    public function __construct($idguest, $name, $cpf)
-    {
+    public function __construct($idguest, $name, $cpf){
         $this->idguest = $idguest;
         $this->name = $name;
         $this->cpf = $cpf;
     }
 
     // Métodos getter e setter
-    public function getIdGuest()
-    {
+    public function getIdGuest(){
         return $this->idguest;
     }
 
 
-    public function getName()
-    {
+    public function getName(){
         return $this->name;
     }
 
-    public function setName($name)
-    {
+    public function setName($name){
         $this->name = $name;
     }
 
-    public function getCpf()
-    {
+    public function getCpf(){
         return $this->cpf;
     }
 
-    public function setCpf($cpf)
-    {
+    public function setCpf($cpf){
         $this->cpf = $cpf;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-class OrderItems
+class OrderItem
 {
     private $idorder_items;
     private $order_id;
@@ -7,8 +7,7 @@ class OrderItems
     private $quantity;
     private $price;
 
-    public function __construct($idorder_items, $order_id, $product_id, $quantity, $price)
-    {
+    public function __construct($idorder_items, $order_id, $product_id, $quantity, $price){
         $this->idorder_items = $idorder_items;
         $this->order_id = $order_id;
         $this->product_id = $product_id;
@@ -17,53 +16,43 @@ class OrderItems
     }
 
     // Métodos getter e setter
-    public function getIdOrderItems()
-    {
+    public function getIdOrderItems(){
         return $this->idorder_items;
     }
 
-    public function setIdOrderItems($idorder_items)
-    {
+    public function setIdOrderItems($idorder_items){
         $this->idorder_items = $idorder_items;
     }
 
-    public function getOrderId()
-    {
+    public function getOrderId(){
         return $this->order_id;
     }
 
-    public function setOrderId($order_id)
-    {
+    public function setOrderId($order_id){
         $this->order_id = $order_id;
     }
 
-    public function getProductId()
-    {
+    public function getProductId(){
         return $this->product_id;
     }
 
-    public function setProductId($product_id)
-    {
+    public function setProductId($product_id){
         $this->product_id = $product_id;
     }
 
-    public function getQuantity()
-    {
+    public function getQuantity(){
         return $this->quantity;
     }
 
-    public function setQuantity($quantity)
-    {
+    public function setQuantity($quantity){
         $this->quantity = $quantity;
     }
 
-    public function getPrice()
-    {
+    public function getPrice(){
         return $this->price;
     }
 
-    public function setPrice($price)
-    {
+    public function setPrice($price){
         $this->price = $price;
     }
 }
