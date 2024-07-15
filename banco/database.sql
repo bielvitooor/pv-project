@@ -117,8 +117,19 @@ CREATE TABLE IF NOT EXISTS pv.order_items (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+select * from order_items;
+select * from orders;
+-- select de gerar a nota fiscal, fazer um view fica melhor
+SELECT o.idorder, gu.name AS guest_name, p.idproduct, p.name_product, oi.quantity, p.price, ROUND(oi.quantity * p.price, 2) AS subtotal
+FROM orders o
+INNER JOIN order_items oi ON o.idorder = oi.order_id
+INNER JOIN product p ON oi.product_id = p.idproduct
+INNER JOIN guest gu ON o.guest_idguest = gu.idguest
+WHERE o.idorder = 112;
+
+
 
 -- Restaurar verificações
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- SET SQL_MODE=@OLD_SQL_MODE;
+-- SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+-- SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
