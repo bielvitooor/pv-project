@@ -28,8 +28,8 @@ class ProductDao
     }
 
     public function updateProduct($product){
-        $stmt = $this->conn->prepare("UPDATE product SET name_product = :name_product, price = :price, quantity = :quantity WHERE idproduct = :idproduct");
-        $stmt->bindParam(':name_product', $product->getNameProduct());
+        $stmt = $this->conn->prepare("UPDATE product SET  price = :price, quantity = :quantity WHERE idproduct = :idproduct");
+        //$stmt->bindParam(':name_product', $product->getNameProduct());
         $stmt->bindParam(':price', $product->getPrice());
         $stmt->bindParam(':quantity', $product->getQuantity());
         $stmt->bindParam(':idproduct', $product->getIdProduct());

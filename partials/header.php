@@ -14,7 +14,7 @@
                 <li><a href="/pv-project/views/products.php">Produtos</a></li>
                 <li><a href="/pv-project/views/orders.php">Pedidos</a></li>
                 <li><a href="/pv-project/views/login.php">Admin</a></li>
-                <li><a href="/pv-project/painel.php">Painel</a></li>
+                <li><a href="/pv-project/views/painel.php">Painel</a></li>
             </ul>
         </nav>
         </header>    

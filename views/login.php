@@ -9,7 +9,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
 
     <div id="error-message" style="color: red;"></div>
 
-    <form id="login-form" action="../Controller/AdminController.php" method="POST">
+    <form id="login-form" action="../controllers/AdminController.php" method="POST">
         <label for="login">Login:</label>
         <input type="text" id="login" name="login" required><br>
         

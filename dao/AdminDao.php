@@ -23,7 +23,7 @@ class AdminDao
         }
     }
 }
-//New AdminDao(Connection::getConnection());
+
 
 
 ?>
