@@ -1,7 +1,7 @@
 <?php
 require_once("../banco/Connection.php");
 use config\banco\Connection as Connection;
-require_once("../Model/Status.php");
+require_once("../models/Status.php");
 
 try {
     $conn = Connection::getConnection();

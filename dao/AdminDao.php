@@ -1,8 +1,4 @@
 <?php
-
-require_once("../banco/Connection.php");
-use config\banco\Connection as Connection;
-
 class AdminDao
 {
     private $conn;
@@ -27,25 +23,7 @@ class AdminDao
         }
     }
 }
+//New AdminDao(Connection::getConnection());
 
-// Exemplo de uso
-try {
-    $conn = Connection::getConnection();
-    $adminDao = new AdminDao($conn);
-
-    // Tentativa de autenticação
-    $login = "admin";
-    $password = "admin";
-
-    $admin = $adminDao->authenticate($login, $password);
-
-    if ($admin) {
-        echo "Autenticação bem-sucedida. Bem-vindo, " . $admin['name'] . "!";
-    } else {
-        echo "Falha na autenticação. Verifique suas credenciais.";
-    }
-} catch (\PDOException $error) {
-    die("Erro de conexão: " . $error->getMessage());
-}
 
 ?>
