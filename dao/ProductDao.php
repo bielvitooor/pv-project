@@ -1,7 +1,4 @@
 <?php
-
-require_once("../models/Product.php");
-
 class ProductDao
 {
     private $conn;
@@ -9,7 +6,12 @@ class ProductDao
     public function __construct($conn){
         $this->conn = $conn;
     }
-
+    function getProductById($idproduct){
+        $stmt = $this->conn->prepare("SELECT * FROM product WHERE idproduct = :idproduct");
+        $stmt->bindParam(':idproduct', $idproduct);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
     public function showAllProducts(){
         $stmt = $this->conn->query("SELECT * FROM product");
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);

@@ -57,10 +57,10 @@ $products = $productDao->showAllProducts();
                         <?php foreach ($products as $product): ?>
                             <th><?= $product['name_product'] ?></th>
                             <th>
-                                <input type="text" name="products[<?= $product['idproduct'] ?>][price]" value="<?= $product['price'] ?>">
+                                <input type="number" name="products[<?= $product['idproduct'] ?>][price]" value="<?= $product['price'] ?>">
                             </th>
                             <th>
-                                <input type="text" name="products[<?= $product['idproduct'] ?>][quantity]" value="<?= $product['quantity'] ?>">
+                                <input type="number" name="products[<?= $product['idproduct'] ?>][quantity]" value="<?= $product['quantity'] ?>">
                             </th>
                         </tr>
                         <?php endforeach; ?>
@@ -71,5 +71,5 @@ $products = $productDao->showAllProducts();
         </div>
     </div>
 </div>
-
+<script src="script/main.js"></script>
 <?php include ('../partials/footer.php'); ?>

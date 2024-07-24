@@ -1,11 +1,23 @@
 <?php
+require_once("../dao/OrderItemDAO.php");
 class OrderDAO {
     private $conn;
 
     public function __construct($conn) {
         $this->conn = $conn;
     }
-
+    public function createOrder($Order){
+        $guestId = $Order->getGuestId();
+        $paymentId = $Order->getPaymentId();
+        $totalValue = $Order->getTotalValue();
+        $statusId = $Order->getStatusId();
+        $stmt = $this->conn->prepare("INSERT INTO orders (guest_idguest, payment_idpayment, totalvalue, status_idstatus) VALUES (:guest_idguest, :payment_idpayment, :totalvalue, :status_idstatus)");
+        $stmt->bindParam(':guest_idguest', $guestId);
+        $stmt->bindParam(':payment_idpayment', $paymentId);
+        $stmt->bindParam(':totalvalue', $totalValue);
+        $stmt->bindParam(':status_idstatus', $statusId);
+        return $stmt->execute();
+    }
     public function getAllOrders() {
         $stmt = $this->conn->prepare("
             SELECT 

@@ -1,64 +1,50 @@
+<?php
+require_once("banco/Connection.php");
+require_once("dao/ProductDao.php");
+require_once("models/Product.php");
+use config\banco\Connection as Connection;
+
+try {
+    $conn = Connection::getConnection();
+    $productDao = new ProductDao($conn);
+    $products = $productDao->showAllProducts();
+} catch (\PDOException $error) {
+    die("Erro ao buscar produtos: " . $error->getMessage());
+}
+session_start();
+?>
 <?php include('partials/header.php'); ?>
-    <main>
 
-        <h1>Bem-vindo ao Posto de Vendas do Campus Ceres</h1>
-
+<main>
+    <h1>Bem-vindo ao Posto de Vendas do Campus Ceres</h1>
+    <form  method="POST">
         <section class="produtos">
+            <?php foreach($products as $product): ?>
             <div class="produto">
-                <img src="/pv-project/images/ovo_branco.jpg" alt="Ovo Branco">
-                <h2>Ovo Branco</h2>
-                <p>R$ 0.60 un</p>
-                <p>60 restantes</p>
+                <img src="/pv-project/images/<?=$product['name_product']?>.jpg" alt="<?=$product['name_product'] ?>">
+                <h2><?= $product['name_product'] ?></h2>
+                <p id="price-<?= $product['idproduct']?>">R$ <?= $product['price'] ?></p>
+                <p id="avaliable-<?= $product['idproduct'] ?>"><?=$product['quantity'] ?> restantes</p>
                 <div class="quantidade">
-                    <button>-</button>
-                    <input type="text" value="0">
-                    <button>+</button>
+                    <button type="button" class="decrement" data-id="<?= $product['idproduct'] ?>">-</button>
+                    <input type="text" id="quantity-<?= $product['idproduct'] ?>" class="counter" name="quantities[<?= $product['idproduct']?>]" value="0" readonly>
+                    <button type="button" class="increment" data-id="<?= $product['idproduct'] ?>">+</button>
                 </div>
             </div>
-
-            <div class="produto">
-                <img src="/pv-project/images/ovo_vermelho.jpg" alt="Ovo Vermelho">
-                <h2>Ovo Vermelho</h2>
-                <p>R$ 0.80 un</p>
-                <p>60 restantes</p>
-                <div class="quantidade">
-                    <button>-</button>
-                    <input type="text" value="0">
-                    <button>+</button>
-                </div>
-            </div>
-
-            <div class="produto">
-                <img src="/pv-project/images/sobrecoxa.jpg" alt="Sobrecoxa">
-                <h2>Sobrecoxa</h2>
-                <p>R$ 5.50 Kg</p>
-                <p>60 restantes</p>
-                <div class="quantidade">
-                    <button>-</button>
-                    <input type="text" value="0">
-                    <button>+</button>
-                </div>
-            </div>
-
-            <div class="produto indisponivel">
-                <img src="/pv-project/images/leite.jpg" alt="Leite">
-                <h2>Leite</h2>
-                <p>R$ 0.80 L</p>
-                <p>Indisponível</p>
-                <div class="quantidade">
-                    <button disabled>-</button>
-                    <input type="text" value="0" disabled>
-                    <button disabled>+</button>
-                </div>
-            </div>
-            
+            <?php endforeach; ?>  
         </section>
 
         <div class="total">
-            <p>Total: R$ 0.0</p>
+            <p>Total: R$<strong id="subtotal">0.00</strong></p>
         </div>
+        <button type="submit" class="comprar">Comprar</button>
+        <dialog>
+            <p>Confirmação de produto</p>
+           <button type="button" class="close">X</button>
+        </dialog>
+    </form>
+</main>
 
-        <button class="comprar">Comprar</button>
-        
-    </main>
-<?php include('partials/footer.php'); ?>
+<?php //include('partials/footer.php'); ?>
+
+<script src="scripts/main.js"></script>
