@@ -35,7 +35,7 @@ function addOrder($orderItems, $payment_idpayment, $guest_idguest, $status_idsta
 
         // Adicionar um novo pedido
         $order = new Orders($totalvalue, $payment_idpayment, $guest_idguest, $status_idstatus);
-        $orderDao->addOrder($order);
+        $orderDao->createOrder($order);
         $orderId = $conn->lastInsertId();
 
         // Adicionar itens do pedido
