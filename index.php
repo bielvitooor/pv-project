@@ -17,7 +17,7 @@ session_start();
 
 <main>
     <h1>Bem-vindo ao Posto de Vendas do Campus Ceres</h1>
-    <form  method="POST">
+    <form  action="views/confirm_order.php" method="POST" id="product-selected">
         <section class="produtos">
             <?php foreach($products as $product): ?>
             <div class="produto">
@@ -38,11 +38,8 @@ session_start();
             <p>Total: R$<strong id="subtotal">0.00</strong></p>
         </div>
         <button type="submit" class="comprar">Comprar</button>
-        <dialog>
-            <p>Confirmação de produto</p>
-           <button type="button" class="close">X</button>
-        </dialog>
     </form>
+    
 </main>
 
 <?php //include('partials/footer.php'); ?>

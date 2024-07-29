@@ -60,16 +60,4 @@ function addOrder($orderItems, $payment_idpayment, $guest_idguest, $status_idsta
         die("Erro ao processar o pedido: " . $e->getMessage());
     }
 }
-
-// Exemplo de uso:
-$orderItems = [
-    ['product_id' => 1, 'quantity' => 2, 'price' => 10.00],
-    ['product_id' => 2, 'quantity' => 1, 'price' => 20.00]
-];
-$payment_idpayment = 1;
-$guest_idguest = 1;
-$status_idstatus = 8;
-
-addOrder($orderItems, $payment_idpayment, $guest_idguest, $status_idstatus);
-//showAllOrders();
 ?>

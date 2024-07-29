@@ -2,7 +2,7 @@
 
 require_once("../banco/Connection.php");
 require_once("../dao/OrderDao.php");
-require_once("../models/Order.php");
+require_once("../models/Orders.php");
 require_once("../dao/productDao.php");
 require_once("../models/Product.php");
 use config\banco\Connection as Connection;

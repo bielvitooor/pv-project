@@ -1,5 +1,8 @@
 <?php
+require_once("../banco/Connection.php");
+require_once("../dao/OrderDao.php");
 session_start();
+use config\banco\Connection as Connection;
 
 // Verificar se o usuário está logado e é um administrador
 if (!isset($_SESSION['admin'])) {
@@ -7,9 +10,6 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 
-require_once("../banco/Connection.php");
-require_once("../dao/OrderDAO.php");
-use config\banco\Connection as Connection;
 
 try {
     $conn = Connection::getConnection();
