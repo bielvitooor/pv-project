@@ -23,6 +23,10 @@ class GuestDao
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function getIdGuest(){
+        $stmt = $this->conn->query("SELECT idguest FROM guest ORDER BY idguest DESC LIMIT 1");
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
     public function addGuest($guest){
         $stmt = $this->conn->prepare("INSERT INTO guest (name, cpf) VALUES (:name, :cpf)");
         $stmt->bindParam(':name', $guest->getName());

@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const incrementButtons = document.querySelectorAll(".increment");
     const decrementButtons = document.querySelectorAll(".decrement");
     const subtotalElement = document.getElementById("subtotal");
+    const cpf = document.getElementById("cpf");
 
     function updateSubtotal() {
         let subtotalValue = 0.00;
@@ -32,10 +33,13 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             const id = this.getAttribute('data-id');
             const counter = document.getElementById("quantity-" + id);
-            if (parseInt(counter.value) > 0) { // Ensure quantity doesn't go below 0
+            if (parseInt(counter.value) > 0) { 
                 counter.value = parseInt(counter.value) - 1;
                 updateSubtotal();
             }
         });
     });
+    // verifify cpf on database if exists via POST
+    
+
 });
