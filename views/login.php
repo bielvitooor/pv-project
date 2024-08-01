@@ -3,23 +3,39 @@
 $error = isset($_GET['error']) ? $_GET['error'] : null;
 ?>
 
-<?php include('../partials/header.php'); ?>
-<main>
-    <h1>Login do Administrador</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login do Administrador</title>
+</head>
+<body>
+    <?php include('../partials/header.php'); ?>
 
-    <div id="error-message" style="color: red;"></div>
+    <main class="container mt-5">
+        <h1 class="mb-4">Login do Administrador</h1>
 
-    <form id="login-form" action="../controllers/AdminController.php" method="POST">
-        <label for="login">Login:</label>
-        <input type="text" id="login" name="login" required><br>
-        
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" required><br>
-        
-        <input type="submit" value="Entrar">
-    </form>
-</main>
+        <div id="error-message" class="alert alert-danger d-none"></div>
 
-<script src="/pv-project/assets/js/login.js"></script>
+        <form id="login-form" action="../controllers/AdminController.php" method="POST">
+            <div class="form-group">
+                <label for="login">Login:</label>
+                <input type="text" id="login" name="login" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+    </main>
 
-<?php include('../partials/footer.php'); ?>
+    <!-- Seu JavaScript personalizado -->
+    <script src="/pv-project/assets/js/login.js"></script>
+    
+    <?php include('../partials/footer.php'); ?>
+</body>
+</html>
