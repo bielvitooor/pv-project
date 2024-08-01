@@ -17,11 +17,11 @@ session_start();
 
 <main>
     <h1>Bem-vindo ao Posto de Vendas do Campus Ceres</h1>
-    <form  action="views/confirm_order.php" method="POST" id="product-selected">
+    <form action="/pv-project/views/confirm_order.php" method="POST" id="product-selected">
         <section class="produtos">
             <?php foreach($products as $product): ?>
             <div class="produto">
-                <img src="/pv-project/images/<?=$product['name_product']?>.jpg" alt="<?=$product['name_product'] ?>">
+                <img src="/pv-project/assets/images/<?=$product['name_product']?>.jpg" alt="<?=$product['name_product'] ?>">
                 <h2><?= $product['name_product'] ?></h2>
                 <p id="price-<?= $product['idproduct']?>">R$ <?= $product['price'] ?></p>
                 <p id="avaliable-<?= $product['idproduct'] ?>"><?=$product['quantity'] ?> restantes</p>
@@ -39,9 +39,7 @@ session_start();
         </div>
         <button type="submit" class="comprar">Comprar</button>
     </form>
-    
 </main>
 
-<?php //include('partials/footer.php'); ?>
-
+<?php include('partials/footer.php'); ?>
 <script src="scripts/main.js"></script>

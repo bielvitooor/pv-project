@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posto de Vendas do Campus Ceres</title>
-    <link rel="stylesheet" href="/pv-project/css/styles.css">
+    <link rel="stylesheet" href="/pv-project/assets/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/pv-project/assets/css/styles.css">
 </head>
 <body>
     <header>
@@ -15,7 +16,6 @@
                 <li><a href="/pv-project/views/painel.php">Painel</a></li>
             </ul>
         </nav>
-        </header>    
-
+    </header>
 </body>
 </html>

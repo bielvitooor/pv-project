@@ -1,5 +1,5 @@
 <?php 
-include ('../partials/header.php');
+include('../partials/header.php');
 require_once("../banco/Connection.php");
 use config\banco\Connection as Connection;
 require_once("../dao/AdminDAO.php");
@@ -12,6 +12,7 @@ if (!isset($_SESSION['admin'])) {
     header("Location: ./login.php");
     exit();
 }
+
 $productDao = new ProductDao(Connection::getConnection());
 $products = $productDao->showAllProducts();
 ?>
@@ -24,7 +25,7 @@ $products = $productDao->showAllProducts();
 
 <div>Painel</div>
 <div class="profile">
-    <img src="profile.jpg" alt="Perfil">
+    <img src="/pv-project/assets/images/profile.jpg" alt="Perfil">
 </div>
 
 <div class="container">
@@ -51,17 +52,17 @@ $products = $productDao->showAllProducts();
                         <?php if (empty($products)): ?>
                         <tr>
                             <td colspan="3">Nenhum produto cadastrado</td>
-
-                        <tr>
+                        </tr>
                         <?php endif; ?>
                         <?php foreach ($products as $product): ?>
-                            <th><?= $product['name_product'] ?></th>
-                            <th>
+                        <tr>
+                            <td><?= $product['name_product'] ?></td>
+                            <td>
                                 <input type="number" name="products[<?= $product['idproduct'] ?>][price]" value="<?= $product['price'] ?>">
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 <input type="number" name="products[<?= $product['idproduct'] ?>][quantity]" value="<?= $product['quantity'] ?>">
-                            </th>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -71,5 +72,5 @@ $products = $productDao->showAllProducts();
         </div>
     </div>
 </div>
-<script src="script/main.js"></script>
-<?php include ('../partials/footer.php'); ?>
+
+<?php include('../partials/footer.php'); ?>
