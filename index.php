@@ -58,7 +58,8 @@ session_start();
     <?php include('partials/footer.php'); ?>
 
     <!-- jQuery, Popper.js, and Bootstrap JS via CDN -->
+     <script src="./scripts/main.js"></script>
 
-    <script src="/pv-project/assets/js/main.js"></script>
+   
 </body>
 </html>

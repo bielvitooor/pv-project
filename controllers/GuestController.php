@@ -32,9 +32,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     if (!$guest) {
         // Se não existe, cria um novo hóspede
+        if($name && $cpf){
         $guest = new Guest(null, $name, $cpf);
         $guestDao->addGuest($guest);
-        $guest = $guestDao->getGuestByCpf($cpf); // Recupera o hóspede com o ID gerado
+        $guest = $guestDao->getGuestByCpf($cpf);
+        }elseif(!4){
+            
+
+            
+        }
+        // Recupera o hóspede com o ID gerado
     }
 
     $total = 0.0;
@@ -48,7 +55,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
 
     // Cria o pedido
-    $order = new Orders(null, $total, $paymentId, $guest['idguest'], 1);
+    $order = new Orders($total, $paymentId, $guest['idguest'],1);
     $orderDao->createOrder($order);
 
     // Adiciona os itens ao pedido
