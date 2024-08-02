@@ -7,10 +7,10 @@ class OrderDAO {
         $this->conn = $conn;
     }
     public function createOrder($Order){
-        $guestId = $Order->getGuestId();
-        $paymentId = $Order->getPaymentId();
+        $guestId = $Order->getGuestIdGuest();
+        $paymentId = $Order->getPaymentIdPayment();
         $totalValue = $Order->getTotalValue();
-        $statusId = $Order->getStatusId();
+        $statusId = $Order->getStatusOrder();
         $stmt = $this->conn->prepare("INSERT INTO orders (guest_idguest, payment_idpayment, totalvalue, status_idstatus) VALUES (:guest_idguest, :payment_idpayment, :totalvalue, :status_idstatus)");
         $stmt->bindParam(':guest_idguest', $guestId);
         $stmt->bindParam(':payment_idpayment', $paymentId);

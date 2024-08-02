@@ -24,7 +24,7 @@ $productDao = new ProductDao($conn);
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $name = $_POST['name'];
     $cpf = $_POST['cpf'];
-    $paymentId = $_POST['payment']; 
+    $paymentId = $_POST['payment'];
     $quantities = $_POST['quantities'];
 
     // Verifica se o hóspede já existe
@@ -32,16 +32,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     if (!$guest) {
         // Se não existe, cria um novo hóspede
-        if($name && $cpf){
         $guest = new Guest(null, $name, $cpf);
         $guestDao->addGuest($guest);
-        $guest = $guestDao->getGuestByCpf($cpf);
-        }elseif(!4){
-            
-
-            
-        }
-        // Recupera o hóspede com o ID gerado
+        $guest = $guestDao->getGuestByCpf($cpf); // Recupera o hóspede com o ID gerado
     }
 
     $total = 0.0;
@@ -55,15 +48,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
 
     // Cria o pedido
-    $order = new Orders($total, $paymentId, $guest['idguest'],1);
+    $order = new Orders($total, $paymentId, $guest['idguest'], 1);
     $orderDao->createOrder($order);
 
     // Adiciona os itens ao pedido
+   $lastOrderId=$conn->lastInsertId();
+
     foreach($quantities as $productId => $quantity){
         if($quantity > 0){
             $product = $productDao->getProductById($productId);
             $totalValueByProduct = $product['price'] * $quantity;
-            $orderItem = new OrderItem(null, $order->getIdOrder(), $productId, $quantity, $totalValueByProduct);
+            $orderItem = new OrderItem(0, $lastOrderId, $productId, $quantity, $totalValueByProduct);
             $orderItemDao->addOrderItem($orderItem);
         }
     }

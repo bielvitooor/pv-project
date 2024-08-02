@@ -119,15 +119,35 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 select * from order_items;
 select * from orders;
--- select de gerar a nota fiscal, fazer um view fica melhor
-SELECT o.idorder, gu.name AS guest_name, p.idproduct, p.name_product, oi.quantity, p.price, ROUND(oi.quantity * p.price, 2) AS subtotal
-FROM orders o
-INNER JOIN order_items oi ON o.idorder = oi.order_id
-INNER JOIN product p ON oi.product_id = p.idproduct
-INNER JOIN guest gu ON o.guest_idguest = gu.idguest
-WHERE o.idorder = 112;
-
-
+CREATE VIEW myorder AS
+SELECT
+  o.idorder AS idorder,
+  g.name AS nome_cliente,
+  GROUP_CONCAT(p.name_product SEPARATOR ', ') AS produtos,
+  GROUP_CONCAT(oi.quantity SEPARATOR ', ') AS quantidades,
+  GROUP_CONCAT(p.price SEPARATOR ', ') AS precos_unitarios,
+  SUM(oi.quantity * p.price) AS totalvalor_produto,
+  o.totalvalue AS totalcompra,
+  g.cpf AS cpf
+FROM
+  pv.orders o
+  INNER JOIN pv.guest g ON o.guest_idguest = g.idguest
+  INNER JOIN pv.order_items oi ON o.idorder = oi.order_id
+  INNER JOIN pv.product p ON oi.product_id = p.idproduct
+GROUP BY
+  o.idorder, g.name, g.cpf;
+  SELECT
+  idorder,
+  nome_cliente,
+  produtos,
+  quantidades,
+  precos_unitarios,
+  totalvalor_produto,
+  totalcompra
+FROM
+  myorder
+WHERE
+  cpf = 123456;
 
 -- Restaurar verificações
 -- SET SQL_MODE=@OLD_SQL_MODE;
