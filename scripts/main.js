@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     const incrementButtons = document.querySelectorAll(".increment");
     const decrementButtons = document.querySelectorAll(".decrement");
     const subtotalElement = document.getElementById("subtotal");
     const cpf = document.getElementById("cpf");
+
 
     function updateSubtotal() {
         let subtotalValue = 0.00;

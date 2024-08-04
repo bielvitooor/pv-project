@@ -94,9 +94,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="button" id="fechar-modal">Fechar</button>
         </form>
     </dialog>
-    <?php } else { header("Location: ../index.php"); } ?>
+    <?php } else 
+    { header("Location: ../index.php"); } ?>
 </main>
-
+<script src="../scripts/main.js"></script>
 <?php include('../partials/footer.php'); ?>
 
-<script src="../scripts/main.js"></script>

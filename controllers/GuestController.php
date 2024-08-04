@@ -29,12 +29,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     // Verifica se o hóspede já existe
     $guest = $guestDao->getGuestByCpf($cpf);
-
+    
     if (!$guest) {
+        if (empty($name)){
+            echo "Nome é obrigatório";
+        }
+        else{
         // Se não existe, cria um novo hóspede
         $guest = new Guest(null, $name, $cpf);
         $guestDao->addGuest($guest);
         $guest = $guestDao->getGuestByCpf($cpf); // Recupera o hóspede com o ID gerado
+        }
     }
 
     $total = 0.0;

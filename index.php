@@ -54,11 +54,11 @@ session_start();
             <button type="submit" class="btn btn-success">Comprar</button>
         </form>
     </main>
+    <script src="./scripts/main.js"></script>
 
     <?php include('partials/footer.php'); ?>
 
     <!-- jQuery, Popper.js, and Bootstrap JS via CDN -->
-     <script src="./scripts/main.js"></script>
 
    
 </body>
