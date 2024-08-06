@@ -19,45 +19,7 @@ $productDao = new ProductDao($conn);
 $orderDao = new OrderDao($conn);
 $orderItemsDao = new OrderItemDao($conn);
 
-function addOrder($orderItems, $payment_idpayment, $guest_idguest, $status_idstatus)
-{
-    global $conn, $orderDao, $orderItemsDao, $productDao;
+//getallorders usin  
 
-    try {
-        // Iniciar a transação
-        $conn->beginTransaction();
 
-        // Calcular o valor total
-        $totalvalue = 0;
-        foreach ($orderItems as $item) {
-            $totalvalue += $item['quantity'] * $item['price'];
-        }
-
-        // Adicionar um novo pedido
-        $order = new Orders($totalvalue, $payment_idpayment, $guest_idguest, $status_idstatus);
-        $orderDao->createOrder($order);
-        $orderId = $conn->lastInsertId();
-
-        // Adicionar itens do pedido
-        foreach ($orderItems as $item) {
-            $productId = $item['product_id'];
-            $quantity = $item['quantity'];
-            $price = $item['price'];
-
-            // Adicionar item ao pedido
-            $orderItem = new OrderItem(null, $orderId, $productId, $quantity, $price);
-            $orderItemsDao->addOrderItem($orderItem);
-
-            // Atualizar quantidade no estoque
-            $productDao->removeStock($productId, $quantity);
-        }
-
-        // Confirmar a transação
-        $conn->commit();
-    } catch (\Exception $e) {
-        // Reverter a transação em caso de erro
-        $conn->rollBack();
-        die("Erro ao processar o pedido: " . $e->getMessage());
-    }
-}
 ?>

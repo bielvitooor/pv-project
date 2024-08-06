@@ -3,6 +3,7 @@ require_once ("../banco/Connection.php");
 require_once ("../dao/AdminDao.php");
 require_once ("../dao/ProductDao.php");
 require_once ("../models/Product.php");
+require_once("../dao/OrderDao.php");
 use config\banco\Connection as Connection;
 
 session_start();
@@ -54,5 +55,24 @@ if(isset($_POST['update'])){
     catch (\PDOException $error) {
         die("Erro de conexão: " . $error->getMessage());
     }
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_order'])) {
+    try {
+        $conn = Connection::getConnection();
+        $orderDao = new OrderDAO($conn);
+
+        foreach ($_POST['order_status'] as $idorder => $status) {
+            $orderDao->updateOrderStatus($idorder, $status);
+        }
+
+        $_SESSION['order_update_message'] = "Pedidos atualizados com sucesso.";
+        header("Location: ../views/orders.php");
+        exit();
+    } catch (\PDOException $error) {
+        die("Erro de conexão: " . $error->getMessage());
+    }
+} else {
+    header("Location: ../views/painel.php");
+    exit();
 }
 ?>

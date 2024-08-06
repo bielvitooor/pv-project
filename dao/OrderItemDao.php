@@ -48,18 +48,4 @@ class OrderItemDao
     }
 }
 
- // Exemplo de uso
-try {
-    $conn = Connection::getConnection();
-    $orderItemsDao = new OrderItemDao($conn);
-
-    // Exemplo de obtenção de todos os itens de pedido
-    $orderItems = $orderItemsDao->getAllOrderItems();
-    foreach ($orderItems as $item) {
-        echo "ID: " . $item['idorder_items'] . ", Pedido ID: " . $item['order_id'] . ", Produto ID: " . $item['product_id'] . ", Quantidade: " . $item['quantity'] . ", Preço: " . $item['price'] . "<br>";
-    }
-} catch (\PDOException $error) {
-    die("Erro de conexão: " . $error->getMessage());
-}   
-
 ?>

@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </select>
 
             <?php foreach ($products as $product): ?>
-                <input type="hidden" name="quantities[<?= $product['idproduct'] ?>]" value="<?= $product['selected_quantity'] ?>">
+                <input  type="hidden" name="quantities[<?= $product['idproduct'] ?>]" value="<?= $product['selected_quantity'] ?>">
             <?php endforeach; ?>
 
             <button type="submit">Confirmar Pedido</button>

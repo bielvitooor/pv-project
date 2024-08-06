@@ -35,12 +35,13 @@ try {
         <h1 class="mb-4">Pedidos</h1>
         
         <?php if (!empty($orders)): ?>
-            <form action="../scripts/update_orders.php" method="POST">
+            <form action="../controllers/AdminController.php" method="POST">
                 <table class="table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>
                             <th>ID do Pedido</th>
                             <th>Cliente</th>
+                            <th>CPF</th>
                             <th>Produto</th>
                             <th>Quantidade</th>
                             <th>Preço Unitário</th>
@@ -51,28 +52,53 @@ try {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($orders as $order): ?>
+                        <?php foreach ($orders as $order): 
+                            $products = explode(',', $order['products']);
+                            $quantities = explode(',', $order['quantities']);
+                            $unitPrices = explode(',', $order['uniprice']);
+                            $subtotals = explode(',', $order['subtotal']);
+                        ?>
                             <tr>
-                                <td><?= htmlspecialchars($order['order_id'], ENT_QUOTES, 'UTF-8') ?></td>
-                                <td><?= htmlspecialchars($order['guest_name'], ENT_QUOTES, 'UTF-8') ?></td>
-                                <td><?= htmlspecialchars($order['product_name'], ENT_QUOTES, 'UTF-8') ?></td>
-                                <td><?= htmlspecialchars($order['quantity'], ENT_QUOTES, 'UTF-8') ?></td>
-                                <td>R$ <?= htmlspecialchars($order['unit_price'], ENT_QUOTES, 'UTF-8') ?></td>
-                                <td>R$ <?= htmlspecialchars($order['total_product_price'], ENT_QUOTES, 'UTF-8') ?></td>
-                                <td><?= htmlspecialchars($order['payment_method'], ENT_QUOTES, 'UTF-8') ?></td>
-                                <td>R$ <?= htmlspecialchars($order['totalvalue'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td><?= htmlspecialchars($order['idorder'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td><?= htmlspecialchars($order['nameguest'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td><?= htmlspecialchars($order['cpf'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td>
-                                    <select name="order_status[<?= htmlspecialchars($order['order_id'], ENT_QUOTES, 'UTF-8') ?>]" class="form-control">
-                                        <option value="1" <?= $order['status'] == 'Pendente' ? 'selected' : '' ?>>Pendente</option>
-                                        <option value="2" <?= $order['status'] == 'Feito' ? 'selected' : '' ?>>Feito</option>
-                                        <option value="3" <?= $order['status'] == 'Concluído' ? 'selected' : '' ?>>Concluído</option>
+                                    <?php foreach ($products as $product): ?>
+                                        <?= htmlspecialchars($product, ENT_QUOTES, 'UTF-8') ?><br>
+                                    <?php endforeach; ?>
+                                </td>
+                                <td>
+                                    <?php foreach ($quantities as $quantity): ?>
+                                        <?= htmlspecialchars($quantity, ENT_QUOTES, 'UTF-8') ?><br>
+                                    <?php endforeach; ?>
+                                </td>
+                                <td>
+                                    <?php foreach ($unitPrices as $price): ?>
+                                        R$ <?= htmlspecialchars($price, ENT_QUOTES, 'UTF-8') ?><br>
+                                    <?php endforeach; ?>
+                                </td>
+                                <td>
+                                    <?php foreach ($subtotals as $subtotal): ?>
+                                        R$ <?= htmlspecialchars($subtotal, ENT_QUOTES, 'UTF-8') ?><br>
+                                    <?php endforeach; ?>
+                                </td>
+                                <td><?= htmlspecialchars($order['payment'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td>R$ <?= htmlspecialchars($order['total'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td>
+                                    <?php
+                                    $orderDAO
+                                    ?>
+                                    <select name="order_status[<?= htmlspecialchars($order['idorder'], ENT_QUOTES, 'UTF-8') ?>]" class="form-control">
+                                        <option value="1" <?= $order['status_idstatus'] == 1 ? 'selected' : '' ?>>Em Espera</option>
+                                        <option value="2" <?= $order['status_idstatus'] == 2 ? 'selected' : '' ?>>Em separação</option>
+                                        <option value="3" <?= $order['status_idstatus'] == 3 ? 'selected' : '' ?>>Pronto</option>
                                     </select>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <button type="submit" class="btn btn-primary">Atualizar Pedidos</button>
+                <button type="submit" class="btn btn-primary" name="update_order">Atualizar Pedidos</button>
             </form>
             
             <form action="../scripts/clear_orders.php" method="POST" class="mt-2">
