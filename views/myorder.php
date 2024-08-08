@@ -7,20 +7,16 @@ require_once('../dao/OrderItemDao.php');
 use config\banco\Connection as Connection;
 
 try {
+    $cpf=$_SESSION['cpf'];
     // Assumindo que o CPF foi salvo na sessão após o login do usuário
     $conn = Connection::getConnection();
+    $guestDao = new GuestDao($conn);
+    $orderDao = new OrderDao($conn);
+    $orders = $orderDao->getAllOrderByCpf($cpf);
+    $nome=$guestDao->getGuestByCpf($cpf);
 } catch (\PDOException $error) {
     die("Erro de conexão: " . $error->getMessage());
 }
-if(!isset($_SESSION['cpf'])){
-    header('Location: login.php');
-    exit();
-}
-$cpf=$_SESSION['cpf'];
-$guestDao = new GuestDao($conn);
-$orderDao = new OrderDao($conn);
-$orders = $orderDao->getAllOrderByCpf($cpf);
-$nome=$guestDao->getGuestByCpf($cpf);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

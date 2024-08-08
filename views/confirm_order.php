@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include('../partials/header.php'); ?>
 <main>
     <?php if (!empty($products)) { ?>
-    <h1>Confirmação do Pedido</h1>
+    <h1>Revisão do pedido</h1>
 
     <form id="confirm-form" method="POST">
         <section class="produtos">
@@ -45,11 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h2><?= $product['name_product'] ?></h2>
                     <p>R$ <span class="price"><?= $product['price'] ?></span></p>
                     <div class="quantidade">
-                        <button type="button" class="decrement" data-id="<?= $product['idproduct'] ?>">-</button>
+                        <label for="quantity-<?= $product['idproduct'] ?>">Quantidade:</label>
                         <input type="text" id="quantity-<?= $product['idproduct'] ?>" class="counter" name="quantities[<?= $product['idproduct']?>]" value="<?= $product['selected_quantity'] ?>" readonly>
-                        <button type="button" class="increment" data-id="<?= $product['idproduct'] ?>">+</button>
+                        <?php $total = $product['price'] * $product['selected_quantity']; ?>
+                        <br>
+                        <p>R$ <span class="subtotal"><?= number_format($total, 2) ?></span></p>
                     </div>
-                    <button type="button" class="remove" data-id="<?= $product['idproduct'] ?>">Excluir</button>
+
                 </div>
             <?php endforeach; ?>
         </section>
@@ -94,8 +96,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="button" id="fechar-modal">Fechar</button>
         </form>
     </dialog>
-    <?php } else 
-    { header("Location: ../index.php"); } ?>
+    <?php } else { 
+        header("Location: ../index.php"); } ?>
 </main>
 <script src="../scripts/main.js"></script>
 <?php include('../partials/footer.php'); ?>

@@ -22,16 +22,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     },
                     body: JSON.stringify({ cpf: cpfValue })
                 })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
                     console.log("Response data:", data);
                     if (data.exists) {
                         nameSection.style.display = "none"; // Esconder campo de nome
+                        document.getElementById("name").value = data.name; // Preencher campo de nome
                     } else {
                         nameSection.style.display = "block"; // Mostrar campo de nome
                     }
@@ -57,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Função para atualizar o subtotal
+    
     function updateSubtotal() {
         let subtotalValue = 0.00;
         document.querySelectorAll(".produto").forEach(function (product) {

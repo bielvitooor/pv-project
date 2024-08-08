@@ -32,6 +32,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $guest = $guestDao->getGuestByCpf($cpf);
         
         header('Content-Type: application/json');
+        echo json_encode(['exists' => !empty($guest),'name'=> $guest['name'] ?? '']);
         if ($guest) {
             echo json_encode(["exists" => true]);
         } else {
@@ -107,7 +108,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     // Envia os dados via POST
     sendPostRequest($url, $data);
-
+    header('Location: ../views/myorder.php');
     exit();
 } else {
     echo "Método não permitido";
