@@ -48,17 +48,5 @@ class GuestDao
 }
 
 // Exemplo de uso
-try {
-    $conn = Connection::getConnection();
-    $guestDao = new GuestDao($conn);
-
-    // Exemplo de obtenção de todos os convidados
-    $guests = $guestDao->getAllGuests();
-    foreach ($guests as $guest) {
-        echo "ID: " . $guest['idguest'] . ", Nome: " . $guest['name'] . ", CPF: " . $guest['cpf'] . "<br>";
-    }
-} catch (\PDOException $error) {
-    die("Erro de conexão: " . $error->getMessage());
-}
 
 ?>

@@ -22,11 +22,9 @@ $guestDao = new GuestDao($conn);
 $orderDao = new OrderDao($conn);
 $orderItemDao = new OrderItemDao($conn);
 $productDao = new ProductDao($conn);
-//listar os pedidos via cpf
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    // Verifica se é uma requisição para verificação de CPF
     if(isset($_SERVER['HTTP_CONTENT_TYPE']) && $_SERVER['HTTP_CONTENT_TYPE'] === 'application/json') {
         $data = json_decode(file_get_contents('php://input'), true);
         $cpf = $data['cpf'];
@@ -47,7 +45,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $paymentId = $_POST['payment'];
     $quantities = $_POST['quantities'];
 
-    // Verifica se o hóspede já existe
     $guest = $guestDao->getGuestByCpf($cpf);
     
     if (!$guest) {
@@ -55,16 +52,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             echo "Nome é obrigatório";
             exit();
         } else {
-            // Se não existe, cria um novo hóspede
             $guest = new Guest(null, $name, $cpf);
             $guestDao->addGuest($guest);
-            $guest = $guestDao->getGuestByCpf($cpf); // Recupera o hóspede com o ID gerado
+            $guest = $guestDao->getGuestByCpf($cpf);
         }
     }
 
     $total = 0.0;
 
-    // Calcula o total do pedido
     foreach($quantities as $id => $quantity){
         if($quantity > 0){
             $product = $productDao->getProductById($id);
@@ -72,11 +67,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
     }
 
-    // Cria o pedido
-    $order = new Orders($total, $paymentId, $guest['idguest'], 1);
+    date_default_timezone_set('America/Sao_Paulo');
+    $date = date('Y-m-d H:i:s', time());
+    $order = new Orders($total, $paymentId, $guest['idguest'], 1, $date);
     $orderDao->createOrder($order);
 
-    // Adiciona os itens ao pedido
     $lastOrderId = $conn->lastInsertId();
 
     foreach($quantities as $productId => $quantity){
@@ -87,17 +82,35 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $orderItemDao->addOrderItem($orderItem);
         }
     }
-    //atualizar o estoque automaticamente
+
     foreach($quantities as $productId => $quantity){
         if($quantity > 0){
             $product = $productDao->getProductById($productId);
             $productDao->removeStock($productId, $quantity);
         }
     }
-    header("Location: ../index.php");
+
+
+    function sendPostRequest($url, $data) {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return $response;
+    }
+
+
+    $url = '../views/myorder.php';
+    $data = ['cpf' => $cpf];
+
+    // Envia os dados via POST
+    sendPostRequest($url, $data);
+
     exit();
 } else {
-    header("Location: ../index.php");
+    echo "Método não permitido";
     exit();
 }
 ?>
