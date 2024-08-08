@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
     <button id="confirmar-pedido">Confirmar Pedido</button>
 
-    <dialog id="modal-confirmacao" open>
+    <dialog id="modal-confirmacao">
         <h2>Confirme seus Dados</h2>
         <form id="review-order" action="../controllers/GuestController.php" method="POST">
             

@@ -4,16 +4,24 @@ require_once('../banco/Connection.php');
 require_once('../dao/OrderDao.php');
 require_once('../dao/GuestDao.php');
 require_once('../dao/OrderItemDao.php');
+
 use config\banco\Connection as Connection;
 
 try {
-    $cpf=$_SESSION['cpf'];
-    // Assumindo que o CPF foi salvo na sessão após o login do usuário
+    // Verifica se o CPF está disponível na sessão
+    if (!isset($_SESSION['cpf'])) {
+        die("CPF não encontrado. Por favor, faça um pedido primeiro.");
+    }
+
+    $cpf = $_SESSION['cpf'];
+
+    // Assumindo que o CPF foi salvo na sessão após o pedido
     $conn = Connection::getConnection();
     $guestDao = new GuestDao($conn);
     $orderDao = new OrderDao($conn);
+
     $orders = $orderDao->getAllOrderByCpf($cpf);
-    $nome=$guestDao->getGuestByCpf($cpf);
+    $nome = $guestDao->getGuestByCpf($cpf);
 } catch (\PDOException $error) {
     die("Erro de conexão: " . $error->getMessage());
 }
@@ -42,7 +50,7 @@ try {
                             <p class="card-text"><strong>Produtos:</strong> <?= htmlspecialchars($order['products'], ENT_QUOTES, 'UTF-8') ?></p>
                             <p class="card-text"><strong>Total:</strong> R$ <?= htmlspecialchars($order['total'], ENT_QUOTES, 'UTF-8') ?></p>
                             <p class="card-text"><strong>Pagamento:</strong> <?= htmlspecialchars($order['payment'], ENT_QUOTES, 'UTF-8') ?></p>
-                            <p class="card-text"><strong>Data:</strong><?=htmlspecialchars($order['dateorder'],ENT_QUOTES,'UTF-8') ?> <!-- Adicione aqui a data do pedido, se disponível --></p>
+                            <p class="card-text"><strong>Data:</strong> <?= htmlspecialchars($order['dateorder'], ENT_QUOTES, 'UTF-8') ?></p>
                         </div>
                     </div>
                 </div>
