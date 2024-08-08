@@ -11,11 +11,14 @@ class OrderDAO {
         $paymentId = $Order->getPaymentIdPayment();
         $totalValue = $Order->getTotalValue();
         $statusId = $Order->getStatusOrder();
-        $stmt = $this->conn->prepare("INSERT INTO orders (guest_idguest, payment_idpayment, totalvalue, status_idstatus) VALUES (:guest_idguest, :payment_idpayment, :totalvalue, :status_idstatus)");
+        $dateorder = $Order->getDateOrder();
+
+        $stmt = $this->conn->prepare("INSERT INTO orders (guest_idguest, payment_idpayment, totalvalue, status_idstatus,dateorder) VALUES (:guest_idguest, :payment_idpayment, :totalvalue, :status_idstatus,:dateorder)");
         $stmt->bindParam(':guest_idguest', $guestId);
         $stmt->bindParam(':payment_idpayment', $paymentId);
         $stmt->bindParam(':totalvalue', $totalValue);
         $stmt->bindParam(':status_idstatus', $statusId);
+        $stmt->bindParam(':dateorder', $dateorder,PDO::PARAM_STR);
         return $stmt->execute();
     }
     public function getAllOrders(){
@@ -39,13 +42,15 @@ class OrderDAO {
                         INNER JOIN pv.status s ON o.status_idstatus = s.idstatus
                         INNER JOIN pv.payment m ON o.payment_idpayment = m.idpayment
                       GROUP BY 
-                        o.idorder, g.name, g.cpf, o.totalvalue, o.status_idstatus, s.description, m.tipo");
+                        o.idorder, g.name, g.cpf, o.totalvalue, o.status_idstatus, s.description, m.tipo
+                      ORDER BY
+                        o.dateorder DESC");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getAllOrderByCpf($cpf) {
         $stmt = $this->conn->query("
-           SELECT * FROM myorder WHERE cpf = $cpf;
+           SELECT * FROM myorder WHERE cpf = $cpf ORDER BY dateorder DESC;
         ");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

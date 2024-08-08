@@ -6,12 +6,15 @@ class Orders
     private $payment_idpayment;
     private $guest_idguest;
     private $status_idstatus;
+    
+    private $dateorder;
 
-    public function __construct($totalvalue, $payment_idpayment, $guest_idguest,$status_idstatus){
+    public function __construct($totalvalue, $payment_idpayment, $guest_idguest,$status_idstatus,$dateorder){
         $this->status_idstatus = $status_idstatus;
         $this->totalvalue = $totalvalue;
         $this->payment_idpayment = $payment_idpayment;
         $this->guest_idguest = $guest_idguest;
+        $this->dateorder = $dateorder;
     }
 
     public function getIdOrder(){
@@ -55,6 +58,15 @@ class Orders
     }
     public function getStatusIdStatus(){
         return $this->status_idstatus;
+    }
+    public function setStatusIdStatus($status_idstatus){
+        $this->status_idstatus = $status_idstatus;
+    }
+    public function getDateOrder(){
+        return $this->dateorder;
+    }
+    public function setDateOrder($dateorder){
+        $this->dateorder = $dateorder;
     }
 }
 ?>

@@ -59,16 +59,5 @@ class ProductDao
     }
 }
 
-// Exemplo de uso
-// try {
-//     $conn = Connection::getConnection();
-//     $productDao = new ProductDao($conn);
-//     $products = $productDao->showAllProducts();
-//     foreach ($products as $product) {
-//         echo "ID: " . $product['idproduct'] . ", Nome: " . $product['name_product'] . ", Preço: " . $product['price'] . ", Quantidade: " . $product['quantity'] . "<br>";
-//     }
-// } catch (\PDOException $error) {
-//     die("Erro de conexão: " . $error->getMessage());
-// }
 
 ?>

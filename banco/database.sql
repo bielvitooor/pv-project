@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS pv.orders (
   totalvalue DECIMAL(10,2) NOT NULL,
   payment_idpayment INT(11) NOT NULL,
   guest_idguest INT(11) NOT NULL,
+  dateorder DATETIME,
   status_idstatus INT NOT NULL,
   PRIMARY KEY (idorder),
   INDEX fk_orders_payment1_idx (payment_idpayment ASC),
@@ -127,6 +128,7 @@ SELECT
   GROUP_CONCAT(oi.quantity SEPARATOR ', ') AS quantidades,
   GROUP_CONCAT(p.price SEPARATOR ', ') AS precos_unitarios,
   SUM(oi.quantity * p.price) AS totalvalor_produto,
+  o.dateorder,
   o.totalvalue AS totalcompra,
   g.cpf AS cpf
 FROM
@@ -136,20 +138,31 @@ FROM
   INNER JOIN pv.product p ON oi.product_id = p.idproduct
 GROUP BY
   o.idorder, g.name, g.cpf;
-  SELECT
-  idorder,
-  nome_cliente,
-  produtos,
-  quantidades,
-  precos_unitarios,
-  totalvalor_produto,
-  totalcompra
-FROM
-  myorder
-WHERE
-  cpf = 123456;
-
 -- Restaurar verificações
 -- SET SQL_MODE=@OLD_SQL_MODE;
 -- SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 -- SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+CREATE VIEW myorder AS 
+SELECT
+  o.idorder AS idorder,
+  g.name AS nameguest,
+  GROUP_CONCAT(p.name_product SEPARATOR ', ') AS products,
+  GROUP_CONCAT(oi.quantity SEPARATOR ', ') AS quantities,
+  GROUP_CONCAT(p.price SEPARATOR ', ') AS uniprice,
+  GROUP_CONCAT(oi.quantity * p.price SEPARATOR ', ') AS subtotal,
+  o.totalvalue AS total,
+  s.description AS statusoder,
+  m.tipo as payment,
+  g.cpf AS cpf
+  
+FROM
+  pv.orders o
+  INNER JOIN pv.guest g ON o.guest_idguest = g.idguest
+  INNER JOIN pv.order_items oi ON o.idorder = oi.order_id
+  INNER JOIN pv.product p ON oi.product_id = p.idproduct
+  INNER JOIN pv.status s ON o.status_idstatus= s.idstatus
+  INNER JOIN pv.payment m ON o.payment_idpayment = m.idpayment
+GROUP BY
+  o.idorder, g.name, g.cpf, o.totalvalue;
+  SELECT * FROM myorder;
+SELECT idorder,nameguest,products,quantities,uniprice,subtotal,total FROM myorder WHERE cpf="71173068155";
